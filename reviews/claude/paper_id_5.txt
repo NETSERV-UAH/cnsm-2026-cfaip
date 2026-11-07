@@ -1,0 +1,84 @@
+# TPC Review — CNSM 2026 "The Agentic AI Researcher" Track
+## Paper: "Beyond Zero-Touch: Grand Challenges for Network and Service Management in the Next Decade"
+
+---
+
+## Category 1: Technical Correctness, Soundness & Red Flags
+**Score: 15/25**
+
+The individual technical claims in this paper are, for the most part, accurate at a surface level: SDN/NFV decoupling control from forwarding, the description of ETSI ZSM and ENI, the characterization of O-RAN's near-real-time RIC control loops, and the framing of P4 as enabling in-network telemetry are all standard, correctly stated facts about the field. There is no egregiously wrong technical claim of the kind that would flag outright hallucination of a concept. However, "correctness" here is almost entirely definitional and descriptive — the paper contains no methodology, no architecture with actual components/interfaces, and no mathematical formulation of any kind to evaluate for soundness. Every claim is a restatement of well-known survey-level knowledge; there is nothing to stress-test because nothing is actually proposed, computed, or derived. This makes "technical soundness" a much lower bar to clear than for an empirical paper, and the paper clears it only because it never attempts anything falsifiable.
+
+The reference list is the more important test here, and it is largely clean but not perfect. Items like McKeown et al. (OpenFlow, SIGCOMM CCR 2008), Kreutz et al. (SDN survey, Proc. IEEE 2015), Mijumbi et al. (NFV survey, COMST 2016), Burns et al. (Borg/Omega/Kubernetes, CACM 2016), Bosshart et al. (P4, SIGCOMM CCR 2014), and Mestres et al. (Knowledge-Defined Networking, SIGCOMM CCR 2017) are all real, correctly attributed, and correctly dated — this is a well-curated set of foundational networking references. The standards citations (RFC 7575, ETSI GS ZSM 001/002, ETSI GS ENI 005, 3GPP TS 28.530, O-RAN Alliance architecture description, TM Forum white paper) are plausible in name and numbering and consistent with real specification series, though as grey literature they are inherently harder to verify to the letter and the paper does not give enough detail (dates, exact document versions) to fully confirm each one independently.
+
+A more subtle red flag is citation *concentration and vagueness*: several multi-reference bundles (e.g., "[5], [6], [8], [9], [16], [19]" cited together for "AI-driven control loops") are used to support broad, sweeping claims without differentiating what each individual source actually contributes — a pattern typical of LLM-generated survey text that reaches for citation clusters to sound authoritative rather than engaging with any single source's specific content. Reference [15] ("Network digital twin: A survey," IEEE COMST 2023) is plausible but is cited without volume/issue/page numbers, unlike the other IEEE entries, which is a minor but noticeable formatting inconsistency worth flagging as a low-confidence/possibly-approximate citation.
+
+Overall, the paper is technically inoffensive but technically unambitious: it makes no claims precise enough to be wrong, which caps rather than earns a high soundness score. There is no red flag of fabrication, but there is also no architecture, formula, or protocol to actually assess for correctness — the category's core question ("is the proposed methodology sound?") does not really apply because no methodology is proposed.
+
+---
+
+## Category 2: Novelty, Research Value & Core Strengths
+**Score: 6/20**
+
+This paper is, structurally and substantively, a position/vision paper — a "grand challenges" essay — not a research contribution. Its real strength is breadth and organizational clarity: it does a competent job cataloguing the current landscape (SDN/NFV, cloud-native orchestration, ZSM/ENI, AIOps, LLMs-as-assistants) and projecting forward into a reasonably coherent list of open problems (semantic observability, trustworthy/explainable AI, cross-domain interoperability, AI-native security, and the not-yet-invented "Large Network Models"). As a literature synthesis it is competently done and internally consistent, and Table I (technology vs. remaining challenge) and Table II (research priority vs. expected outcome) are genuinely useful compact summaries for a reader unfamiliar with the space.
+
+However, per the explicit grading criterion, the paper does not present a genuinely novel idea — it does not propose a new architecture, algorithm, protocol, dataset, evaluation, or even a concrete conceptual framework beyond naming existing paradigms (Agentic AI, Digital Twins, semantic telemetry, LNMs) and asserting that they will need to be combined. Claims like "Large Network Models" are gestured at as an emerging category without any definition, comparison to existing foundation-model-for-networking work, or citation to concrete prior art coining or developing the term — this reads as a plausible-sounding but unsubstantiated coinage rather than a grounded contribution.
+
+For a track specifically evaluating *agentic AI as researcher*, the paper's core weakness is that it does not do any research: there is no experiment, no pre-registration, no falsifiable hypothesis, no dataset, and no result that could be right or wrong. It is the kind of document an LLM can produce well from its training data alone, with minimal need for tool use, iterative reasoning, or agentic behavior beyond long-form generation — which limits how much it demonstrates about the "agentic" capability the track is presumably most interested in showcasing. Compared to an empirically-grounded submission, this paper's research value is closer to that of a well-written encyclopedia entry or an editorial than to a contribution advancing the state of the art.
+
+---
+
+## Category 3: Adherence to Track Rules & Disclosure
+**Score: 11/15**
+
+The mandatory Disclosure Statement is present (Appendix A) and identifies the model used (OpenAI ChatGPT, GPT-5.5) and the division of labor: the human research director "defined the topic and constraints" while the AI "generated the technical content." This satisfies the minimum bar of the track's disclosure requirement. However, compared to the far more granular disclosure standard set by other submissions in this pool — which itemize specific interventions (e.g., "one reject with a stated technical reason," "one procedural authorization," a frozen hyperparameter commit) — this statement is comparatively thin. It does not specify what "defining the topic and constraints" entailed, whether there were multiple drafting iterations, whether the human reviewed or edited any content, or whether any fact-checking pass occurred. For a track whose credibility depends on being able to trust exactly how much of the content is unmediated AI output, this level of disclosure is adequate but minimal, and the panel may reasonably want more granularity.
+
+On AI-tone consistency, the paper is stylistically uniform throughout — the same measured, hedge-heavy, listy academic register persists from Introduction through Final Remarks, with no obvious seams suggesting human rewriting of specific passages. This is consistent with a single largely unedited LLM generation pass, which is appropriate for the track's goals.
+
+One structural observation relevant to disclosure integrity: the paper's prose is extremely repetitive across sections — the Introduction, Section II, and the Final Remarks restate nearly identical claims (e.g., "current systems automate but do not achieve true autonomy," "future systems need Agentic AI, Digital Twins, semantic telemetry") three or four times in only slightly different phrasing. This repetition is a known artifact of LLM long-form generation without a strong outline-and-prune editing pass, and while it doesn't violate any disclosure rule, it is itself an interesting data point about the "was this genuinely unedited" question the disclosure statement raises — a very light human edit would likely have caught and trimmed this redundancy.
+
+---
+
+## Category 4: Results, Evaluation, and Honesty on Limitations
+**Score: 3/15**
+
+This category is where the paper is weakest, essentially by genre: there are no results. There is no experiment, no dataset, no evaluation metric, no quantitative or qualitative outcome of any kind — the paper is pure discursive prose plus two descriptive tables (a paradigm-evolution timeline and a challenges/priorities table) that summarize claims rather than report findings. Table I ("Current Technologies and Open Limitations") and Table II ("Research Priorities... Priority... Expected Outcome") are assertions, not measurements — the "Priority" column in Table II (e.g., "Very High," "High," "Medium") appears to be the author's/model's own qualitative judgment with no stated methodology for how those priority levels were derived (no survey, no expert elicitation, no citation-count analysis), which makes the table read as a plausible-sounding but essentially unsupported ranking.
+
+Because there is no methodology producing falsifiable output, there is nothing for the paper to be honest or dishonest about in the way the rubric intends (e.g., no confound to disclose, no negative result to report, no effect size to contextualize). The paper does gesture at limitations of *existing* technologies (Table I's "Remaining Challenges" column, and repeated acknowledgments that current AI in networking is "advisory" rather than "autonomous"), which is a reasonable and honest characterization of the state of the field. But this is qualitatively different from the rubric's intent of assessing whether an agent honestly reports the limitations of *its own* generated results — there are no self-generated results to critique, so this sub-criterion cannot be meaningfully satisfied.
+
+The absence of any evaluation is not necessarily illegitimate for a position paper in a normal conference track, but against this rubric — which explicitly asks whether "results are logically derived from the methodology" and whether limitations of an empirical outcome are honestly disclosed — the paper simply has nothing to score highly on. This is the single largest quantitative gap between this submission and a companion paper in the same pool that runs an actual pre-registered experiment with confound analysis and honest negative findings.
+
+---
+
+## Category 5: Structure, Clarity, and Formatting
+**Score: 12/15**
+
+Structurally, the paper is clean and conventional: Abstract → Introduction → Current State (Section II) → Challenges for the Next Decade (Section III) → Final Remarks (Section IV) → Disclosure Statement → References, with two supporting tables and one summary figure (the paradigm-evolution timeline). This is an appropriate structure for a position/vision paper and is easy to navigate. Section III in particular is well-organized into clearly delineated sub-challenges (observability scalability, trustworthy AI, interoperability, cybersecurity, and undeveloped future technologies), each given a full paragraph with a consistent internal pattern (problem statement → why it matters → what's needed), which aids readability.
+
+Figure 1 (the five-era paradigm evolution table/infographic from "Pre-2010" to "2025 and Beyond") is a genuinely useful visual synthesis and is one of the paper's better original contributions in terms of presentation, even though its content is a re-packaging of standard narrative rather than new information.
+
+The paper's main clarity weakness, as noted in Category 3, is redundancy: the same three or four core claims (automation ≠ autonomy; the need for Agentic AI/Digital Twins/semantic telemetry; the need for interdisciplinary and standardization collaboration) are restated with only minor rephrasing across the Introduction, Section II's closing paragraph, and nearly the entirety of Section IV's five paragraphs. A reader who has absorbed the Introduction gains comparatively little new information from the four-page-long Final Remarks section, which could be condensed to a single paragraph without loss of content. This makes the paper feel padded relative to its actual informational density, and a tighter edit would meaningfully improve its clarity score.
+
+---
+
+## Category 6: Discussion Potential for the Panel
+**Score: 5/10**
+
+This paper offers a different, but still useful, discussion angle for the panel than an empirical submission would: it is a strong example of what LLMs do *very well* — fluent, well-organized, well-cited synthesis of an existing field into a coherent forward-looking narrative — and also a clear example of what they still struggle to do without stronger scaffolding: generate genuinely novel, falsifiable, or risk-taking claims. The panel could productively use this paper to discuss the difference between "sounds authoritative" and "is a contribution," since this submission is fluent enough to read as a legitimate keynote-style overview while containing essentially zero original research content.
+
+A second useful discussion thread is the repetition/padding pattern noted above: this is a well-documented failure mode of long-form unedited LLM generation (restating the same thesis across sections with superficial rephrasing), and the panel might find it instructive to contrast this paper's verbosity against the tighter, hypothesis-driven companion submission in the pool, as a concrete illustration of how much editorial/agentic discipline (outlining, redundancy-pruning, self-critique passes) matters for output quality even when the underlying model is capable.
+
+Third, the vaguer disclosure statement (a single sentence versus an itemized intervention log) is worth raising as a process point: the track's credibility depends on disclosure granularity, and this paper is a useful reference point for discussing what the *minimum acceptable* disclosure should look like versus current best practice observed elsewhere in the pool.
+
+Overall, though, the paper is a less dramatic case study than a submission with a concrete empirical claim (positive or negative) to interrogate — there is no specific number, hypothesis, or falsifiable result for the panel to probe, argue about, or fact-check live, which somewhat limits its value as an active discussion centerpiece compared to papers with real experimental content.
+
+---
+
+## FINAL SCORE: 52/100
+
+(15 + 6 + 11 + 3 + 12 + 5)
+
+---
+
+## Summary Recommendation
+
+This paper should **not** be ranked among the top 11 submissions. It is a fluent, well-structured, and factually clean position paper that competently surveys the current state of network and service management and projects a plausible set of open challenges, and its reference list is largely trustworthy with no evident fabrication. However, against this track's explicit emphasis on evaluating *agentic AI as a researcher*, the paper fatally lacks the core ingredients the rubric rewards most heavily: it proposes no methodology, produces no results, has no hypothesis to confirm or refute, and therefore cannot demonstrate the pre-registration discipline, honest handling of disconfirming evidence, or empirical rigor that a genuine research contribution requires. Combined with a thin disclosure statement and substantial redundancy suggesting minimal editorial refinement, this submission reads as a competent AI-generated survey/essay rather than a research paper, and it should be ranked below submissions in the pool that demonstrate actual experimental design, execution, and self-critical evaluation.

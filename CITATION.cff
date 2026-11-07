@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+type: dataset
+title: "CNSM 2026 — The Agentic AI Researcher: Experiment Archive"
+message: "Please cite this archive when using the collection. Also credit the individual artifacts. All Research Directors are acknowledged in PARTICIPANTS.md."
+authors:
+  - family-names: "Varga"
+    given-names: "Pal"
+    affiliation: "Budapest University of Technology and Economics, Hungary"
+  - family-names: "Galán-Jiménez"
+    given-names: "Jaime"
+    affiliation: "University of Extremadura, Spain"
+  - family-names: "Rojas"
+    given-names: "Elisa"
+    affiliation: "Universidad de Alcalá, Spain"
+  - family-names: "Carrascal"
+    given-names: "David"
+    affiliation: "Universidad de Alcalá, Spain"
+url: https://github.com/NETSERV-UAH/cnsm-2026-cfaip
+abstract: "Archive of an experimental AI research track: 21 submitted papers, a common review rubric, 63 recorded AI review files, the original ranking, 11 presentation videos, and attribution to all 22 recorded human submitters. One Gemini review assignment is unresolved and documented."
+keywords:
+  - CNSM 2026
+  - AI-generated research
+  - LLM-as-a-judge
+  - Network and service management
+  - Research transparency

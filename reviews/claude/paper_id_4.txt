@@ -1,0 +1,82 @@
+# TPC Review — CNSM 2026 "The Agentic AI Researcher" Track
+## Paper: "Do Network Elements Have a Grammatical Fingerprint? A Pre-Registered Test on Cellular Telemetry"
+
+---
+
+## Category 1: Technical Correctness, Soundness & Red Flags
+**Score: 21/25**
+
+The core technical pipeline is coherent and internally consistent. Z-normalizing each element's telemetry before PAA/SAX discretization is the correct way to isolate "grammar" from raw amplitude/volume, and the paper is careful to state this explicitly rather than let it slide as an implementation detail. The choice of an order-k Markov chain as a generative classifier (assign the window to the element of maximum sequence log-likelihood) is a standard, well-justified baseline for symbolic sequences, and the hyperparameter sweep (alphabet size, PAA window, Markov order) reported in Table I is plausible and shows the expected monotonic trend of accuracy increasing with model capacity and window length — a good sanity check that the numbers were not simply invented. The AAFT surrogate control and the label-permutation test are exactly the right statistical tools to separate "temporal structure" from "marginal distribution," and the fact that surrogate accuracy (0.139) sits above chance (0.02) but well below the true grammatical result (0.510) is a technically sensible, non-trivial outcome rather than a suspiciously clean one.
+
+Where the soundness weakens is in the H2 formulation. The scaling relation N∗ = H0·B·C·Q^α with α = −0.77 is imported wholesale from an unpublished "prior proposal" that the authors themselves say they "could not locate a peer-reviewed publication" of. Building a quantitative falsification test (Table IV) around a formula with no derivation, no error bars on α, and no dimensional justification is methodologically shaky — the negative result ("inconsistent") is almost guaranteed given how under-constrained the formula is, and the paper doesn't interrogate whether the formula itself is well-posed rather than just "not verified in the literature." This is a soft-science flaw dressed in rigorous statistical clothing (bootstrap CIs, left-censoring language) that doesn't fully compensate for the shakiness of the object being tested.
+
+On the critical red-flag check requested by the track — the reference list — this paper is notably clean. All six references correspond to real, verifiable works: Martina et al. (Quantum Machine Intelligence, 2022) on quantum device noise fingerprinting; Sirinam et al. (CCS 2018) and Rimmer et al. (NDSS 2018) on website fingerprinting via deep learning; Lin et al. (DMKD 2007) for SAX, correctly citing the extended journal version rather than the original workshop paper; Theiler et al. (Physica D, 1992) for surrogate-data testing; and Barlacchi et al. (Scientific Data, 2015) for the Milano telecom dataset, with a correctly formatted Harvard Dataverse DOI. No fabricated venues, no mismatched years, no hallucinated co-authors were detected — this is unusual and commendable for an autonomously generated paper and should be flagged positively to the panel.
+
+Minor additional concerns: the LSTM is described as "deliberately small and lightly tuned," which is an honest caveat but also means the S1 comparison ("shallow suffices") is somewhat under-supported — a stronger LSTM might close the gap, and the paper concedes this itself in the Limitations section rather than overclaiming. The single-dataset, single-city, single-channel scope is appropriately flagged as a generality risk.
+
+---
+
+## Category 2: Novelty, Research Value & Core Strengths
+**Score: 13/20**
+
+The paper's core strength is not a new algorithm but a well-executed transplant of an established idea — symbolic/grammatical fingerprinting, previously demonstrated for quantum device noise — into a new substrate (cellular network telemetry) with careful confound isolation. This is legitimate research value: showing that a "device fingerprint" concept generalizes across domains, and rigorously separating it from an obvious competing explanation (raw traffic volume), is a useful contribution to network/service management even if the individual techniques (SAX, Markov chains, AAFT surrogates) are all decades old. The explicit two-fingerprint framing — grammar-independent-of-volume vs. volume-as-a-competing-signal — is the most intellectually interesting result in the paper and has real operational implications (Section V's privacy discussion) for infrastructure fingerprinting even under aggregation/encryption.
+
+However, judged purely as a novel contribution to the state of the art, the paper is thin. There is no new model, no new discretization scheme, and no new theoretical result; the "contribution" is essentially an empirical replication-and-falsification exercise on a public dataset. The negative finding on H2 (the scaling law doesn't transfer) is honest but not deeply investigative — the paper doesn't attempt to characterize why the scaling relation fails or propose a corrected one, so the reader is left with "it doesn't match" rather than new understanding of why.
+
+For the specific lens of this track — evaluating agentic AI as a researcher — the more interesting "novelty" is procedural rather than scientific: an autonomous agent designed a pre-registration protocol, executed a full sweep-train-test-control pipeline without human technical input, and reported an outcome that undercuts its own headline claim (volume confound) rather than suppressing it. That is a genuine and noteworthy demonstration of agentic research discipline, even if the underlying network-science contribution is modest. The paper is best read as a strong methodology demo wrapped around a modest empirical result.
+
+---
+
+## Category 3: Adherence to Track Rules & Disclosure
+**Score: 14/15**
+
+The mandatory Disclosure Statement is present, detailed, and appropriately placed. It specifies the model/framework (Anthropic Claude, Fable 5, via Claude Code/Agent SDK), explicitly enumerates the four human interventions (initial prompt, one substantive reject with a stated reason, one conditional accept, one procedural authorization for a dataset guestbook email), and affirms that the human wrote no technical content, numbers, citations, or wording. This is exactly the level of granularity the track should want — it distinguishes between human framing/oversight and human authorship, and the disclosed "reject" (H2 mapping and H1/H3 confound) is itself evidence that the review-and-revise loop was substantive rather than pro forma.
+
+The paper also names concrete reproducibility artifacts — a fixed global seed, a hyperparameter-freeze commit preceding test evaluation, a public repository, and a one-command reproduction script — which goes beyond the minimum disclosure bar and into genuine falsifiability, a good practice regardless of authorship.
+
+Stylistically, the AI tone is highly consistent throughout: dense, hedge-qualified, statistically precise prose with no discernible register shifts, no leftover template language, and no obvious "human polish" seams (e.g., no stray colloquialisms, no inconsistent citation formatting, no abrupt shifts in vocabulary level between sections). The self-critical framing recurs uniformly across Abstract, Results, Discussion, and Limitations, which suggests either a single coherent generation pass or careful editing consistency — either way, it satisfies the track's requirement that the technical core reads as machine-authored.
+
+---
+
+## Category 4: Results, Evaluation, and Honesty on Limitations
+**Score: 14/15**
+
+This is the paper's strongest category. The results follow logically from the stated methodology: accuracy scales with sequence length and degrades with N as expected (Table II, Fig. 2), the surrogate control produces a plausible partial collapse rather than an all-or-nothing effect (Table III), and the drift-detection lead time (median 54h, 95% CI 18–90h, excluding zero) is reported with an honest confidence interval rather than a single flattering point estimate. Numbers are cross-consistent between the abstract, tables, and figures (e.g., the 0.51/0.02/25.5× figures agree exactly across Abstract, Table II, and Table III), which is a basic but often-violated sanity check that this paper passes cleanly.
+
+Critically, the paper does not manufacture a clean success story. It explicitly demotes its own headline hypothesis: the "grammatical fingerprint" is shown to coexist with — and at small N be dominated by — a trivial mean-level baseline (0.85 accuracy at N=10 using nothing but average traffic), and the paper states plainly that this must be read as "volume-plus-grammar," not grammar alone. It also reports that its own sequence model (LSTM) underperforms the shallow baseline, and that its second hypothesis (H2, scaling-law consistency) is outright refuted rather than reframed to look better. This is exactly the behavior the track should be rewarding: an agent willing to report disconfirming and unflattering results with the same statistical rigor as the confirmatory ones.
+
+The Limitations section (Section VI) is unusually thorough for a 4-page conference paper — it separately flags the volume confound, the residual 7× marginal component in the surrogate, the left-censored N∗ threshold, the unverifiable prior scaling relation, and the under-tuned LSTM, each with a one-sentence honest assessment of what it means for the paper's claims. Few human-authored short papers are this self-critical; if anything, the paper could be marked down slightly for spending so much space hedging that the "positive" claim (H1, H3) risks being underweighted relative to the negative/confound framing, but this is a minor stylistic quibble against an otherwise exemplary standard of honesty.
+
+---
+
+## Category 5: Structure, Clarity, and Formatting
+**Score: 13/15**
+
+The paper follows a standard, well-executed IEEE conference structure: Abstract → Introduction → Related Work → Method → Results → Discussion → Limitations → Conclusion → Disclosure Statement → References. Each hypothesis (H1, H2, H3, S1) is introduced in the Method section and then explicitly revisited by name in Results, which makes the paper easy to audit against its own pre-registration — a clarity strength that many human-written empirical papers lack. Table and figure references are used correctly and consistently (e.g., Table II ↔ Fig. 1/2, Table IV ↔ Fig. 3), and the figures as described (accuracy vs. L, accuracy vs. N, drift signal over time) map sensibly onto the claims they support.
+
+The prose is dense and occasionally over-compressed — sentences like the H2 mapping paragraph pack multiple technical definitions (H0, B, C, Q, α) into a single dense block that would benefit from a defining equation or a small worked example rather than prose-only notation. This is a readability cost typical of AI-generated technical writing optimized for information density over pacing.
+
+The Related Work section is appropriately scoped and does real comparative work (distinguishing this paper's aggregated/coarse/z-normalized approach from flow-level website-fingerprinting attacks) rather than just listing citations, which is a genuine structural strength. Overall the paper reads as a competent, if slightly terse, short conference paper; a human copy-edit pass would likely tighten a few notation-heavy passages but would not need to fix any structural or logical-flow problems.
+
+---
+
+## Category 6: Discussion Potential for the Panel
+**Score: 9/10**
+
+This paper is an excellent case study for the live panel precisely because it does not present a "wow" result — it presents a disciplined, partially self-refuting empirical study, which is a much more interesting probe of agentic research behavior than a flashy positive-only paper would be. The panel could productively debate whether an agent's willingness to report a refuted hypothesis (H2) and a confound that undercuts its own headline claim (volume vs. grammar) reflects genuine scientific honesty embedded in the agent's training, or simply reflects that the pre-registration commitment made walking back the negative result procedurally costly — i.e., is this honesty, or is this an artifact of the experimental harness forcing commitment before results were known?
+
+A second rich discussion thread is the H2 episode itself: the agent tested its own prior "scaling proposal" against new data and found it did not hold, then explicitly declined to retrofit the mapping to save the result. This is a good concrete example for debating whether agentic systems can perform genuine falsification of their own priors versus merely appearing to via well-chosen framing language ("proposal, not a law").
+
+Finally, the clean reference list (all real, correctly attributed papers) is itself worth flagging to the panel as a positive data point on citation hallucination risk in current-generation agentic research pipelines, since citation fabrication is one of the most common and damaging failure modes in AI-generated academic writing — this paper's clean bill of health here is a useful counter-example to raise in discussion, and its absence of any evasive or defensive editorializing around the negative results makes it a good template for what "good" agentic self-report should look like.
+
+---
+
+## FINAL SCORE: 84/100
+
+(21 + 13 + 14 + 14 + 13 + 9)
+
+---
+
+## Summary Recommendation
+
+This paper should be ranked among the top 11 submissions. While its scientific novelty is modest — it largely applies established symbolic-dynamics and surrogate-testing techniques to a new dataset rather than contributing a new method — it is exceptionally strong on exactly the dimensions this experimental track is designed to probe: a clean, verifiable reference list with no hallucinated citations, a rigorous pre-registration discipline with disclosed human interventions, and an unusually honest reporting of disconfirming results (the volume confound and the refuted H2 scaling law) rather than post-hoc reframing to manufacture a cleaner narrative. As a demonstration of what a well-constrained agentic research pipeline can produce — technically sound, self-critical, and free of the citation-fabrication failure mode that plagues much AI-generated academic writing — it is one of the more instructive submissions for the panel's live discussion, even though a human reviewer at a mainline track would likely ask for a second dataset/city before accepting the substantive network-science claim.

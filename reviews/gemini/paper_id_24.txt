@@ -1,0 +1,45 @@
+Score: 25/25
+The technical concepts related to Network and Service Management are highly accurate and demonstrate a deep understanding of modern volumetric extended-reality (XR) delivery constraints. The paper correctly identifies that reliable QUIC transport over private 5G converts packet loss into retransmission-induced latency. Furthermore, it accurately models the structural differences between codecs—specifically, how MPEG V-PCC's inter-frame prediction amplifies loss across a Group of Frames (GOF), whereas Draco's independent frame compression degrades gracefully.
+
+The proposed architecture and mathematical formulations are logically sound. Inverting an analytical Quality of Experience (QoE) estimator driven by transport telemetry (smoothed delay and loss-event rates) is a robust and practical control strategy. The estimator equations cleverly incorporate an amplification parameter to mathematically represent the varying impacts of transport loss on different codec structures, ensuring that the control loop's decisions are grounded in realistic network-to-application dynamics.
+
+A critical review of the reference list reveals no red flags, fabricated DOIs, or hallucinated citations. The AI author cites genuine, highly relevant literature, including van der Hooft's work on immersive video delivery, the official Draco 3D data compression repository, Meynet's PCQM metric, and core RFCs for QUIC and Intent-Based Networking. This exceptional bibliographic integrity proves that the generative agent successfully utilized its search tools to ground its work in authentic state-of-the-art research.
+
+Score: 19/20
+The real strength of this paper lies in its elegant synthesis of codec-structural awareness with intent-based network management. Rather than relying on deep packet inspection or complex cross-layer signaling, the methodology uses purely passive transport telemetry to drive a closed-loop controller at the edge renderer. This approach is highly pragmatic and perfectly aligned with the zero-touch management philosophy.
+
+The paper presents a genuinely novel control strategy for this specific domain. While adaptive streaming and intent-based management are well-established individually, dynamically switching between fundamentally different volumetric codecs (e.g., from V-PCC to Draco) based on real-time loss-amplification risks is a creative and highly effective solution to a complex QoE problem. The integration of a budgeted slice-priority boost as a secondary actuation knob further elevates the sophistication of the control loop.
+
+This methodology is highly impactful for advancing the state-of-the-art in agentic AI and network automation. By demonstrating that a lightweight, analytical model inversion can outperform tuned, codec-blind threshold policies while saving 51% in bandwidth, the paper provides a concrete blueprint for deploying autonomous agents at the private-5G edge. The ability to maintain bounded violation rates across a 32x loss-severity sweep proves the robustness of the proposed intent-driven architecture.
+
+Score: 15/15
+The submitter flawlessly adhered to the track rules by including a comprehensive and transparent Disclosure Statement in the appendix. The disclosure explicitly names the LLM used (Claude Fable 5), details the sandboxed Python execution environment, and clearly outlines the constraints applied during generation. Crucially, it provides the exact, verbatim initial prompt supplied by the human Research Directors, establishing an unambiguous audit trail for the research process.
+
+This verbatim prompt disclosure is exemplary, as it clearly delineates the boundary between human domain grounding and AI autonomy. The prompt handed the AI the core insight—that QUIC converts loss to latency, and V-PCC amplifies this loss compared to Draco—but left the AI to autonomously formulate the falsifiable claim, design the mathematical estimator, code the simulation, and write the manuscript.
+
+The technical core of the paper is completely free of obvious human-written sections or jarring stylistic shifts. The tone remains consistently formal, analytical, and highly disciplined throughout the text, matching the highest standards of IEEE conference publications. The AI seamlessly integrates the human-provided background into a cohesive narrative without breaking character or revealing its generative origins through generic conversational artifacts.
+
+Score: 15/15
+The generated results are logically derived from the described methodology and supported by coherent, well-chosen evaluation metrics. The discrete-time stochastic control-loop simulation tracks realistically modeled network states (Good, Degraded, Congested) and effectively measures intent-violation rates, bandwidth consumption, and priority budget usage. The presentation of 95% confidence intervals across 30 seeds demonstrates a rigorous approach to quantitative evaluation.
+
+The paper is exceptionally honest and critical regarding its own limitations. It explicitly acknowledges that the QoE model parameters are assumed for qualitative plausibility rather than calibrated to subjective ITU-T P.910 human data, and that loss amplification is modeled as a simplified frame-span stall. By clearly stating that absolute MOS values carry no external validity and that the study evaluates relative behavior, the paper completely avoids over-confident or "magical" claims.
+
+Furthermore, the inclusion of a miscalibration sensitivity analysis adds immense credibility to the evaluation. By deliberately degrading the controller's latency-sensitivity estimate and showing exactly where the proposed IRIS system breaks down (e.g., wasting priority budgets on false alarms or under-reacting), the paper demonstrates a mature, self-critical scientific methodology that many human-authored papers lack.
+
+Score: 15/15
+The paper is perfectly organized, adhering strictly to the expected structure of a high-quality networking systems paper. It progresses logically from the Abstract and Introduction into Background, System Model, Experimental Setup, Results, and Conclusion. The strict adherence to the 5-page IEEE constraint, including the mandatory disclosure appendix, showcases excellent structural discipline.
+
+The explanations are remarkably clear and the argument flow makes complete sense. The transition from explaining the physical problem (volumetric video size) to the transport reality (QUIC converting loss to latency) and finally to the codec vulnerabilities (GOF vs. independent frames) is beautifully articulated. This logical chain perfectly sets up the rationale for the IRIS controller.
+
+Formatting is highly professional. The system architecture diagram is clear and directly maps to the mathematical formulations in the text. The tables efficiently summarize the actuation space, while the time-series excerpt provides a compelling visual proof of how IRIS dynamically navigates network congestion compared to a static baseline.
+
+Score: 10/10
+This paper provides an outstanding case study for the human assessment panel because it highlights the incredible potential of AI as a research execution engine. The agent successfully took a detailed, human-provided domain context and transformed it into a rigorous, executable, and beautifully written simulation study. It demonstrates that when properly grounded, LLMs can execute complex experimental designs flawlessly.
+
+The submission also exposes a fascinating debate topic regarding the boundary of authorship and scientific discovery in agentic AI. Because the verbatim prompt explicitly handed the AI the core insight—the interaction between reliable QUIC and codec loss amplification—the panel can debate whether the AI truly "discovered" anything, or simply formalized and simulated a human's hypothesis.
+
+This tension between human ideation and AI execution makes the paper a perfect anchor for live discussion. It forces the TPC to confront how credit should be assigned when a human provides the conceptual "secret sauce" in a prompt, but the AI performs 100% of the mathematical formulation, coding, statistical analysis, and writing.
+
+FINAL SCORE: 99/100
+
+This paper should absolutely be ranked among the top 11 submissions. It flawlessly executes the mandate of the experimental track, transparently disclosing a prompt that seeded the core insight, and autonomously developing a rigorous, honest, and technically sound simulation study around it while maintaining impeccable bibliographic integrity.

@@ -1,0 +1,77 @@
+{
+  "submissions": 21,
+  "participants": 22,
+  "review_files": 63,
+  "distinct_review_files": 62,
+  "selected_papers": 11,
+  "videos": 11,
+  "selected_ids_in_rank_order": [
+    19,
+    14,
+    17,
+    9,
+    21,
+    6,
+    20,
+    13,
+    24,
+    11,
+    12
+  ],
+  "selection_cutoff": 84,
+  "first_not_selected_score": 83.33333333333333,
+  "duplicates": [
+    [
+      "reviews/gemini/paper_id_22.txt",
+      "reviews/gemini/paper_id_23.txt"
+    ]
+  ],
+  "reviewer_statistics": {
+    "all_21_as_recorded": {
+      "chatgpt": {
+        "n": 21,
+        "mean": 70.80952380952381,
+        "minimum": 34.0,
+        "maximum": 94.0,
+        "scores_at_least_95": 0
+      },
+      "gemini": {
+        "n": 21,
+        "mean": 90.71428571428571,
+        "minimum": 60.0,
+        "maximum": 100.0,
+        "scores_at_least_95": 13
+      },
+      "claude": {
+        "n": 21,
+        "mean": 81.80952380952381,
+        "minimum": 50.0,
+        "maximum": 99.0,
+        "scores_at_least_95": 6
+      }
+    },
+    "20_excluding_paper_23_for_every_reviewer": {
+      "chatgpt": {
+        "n": 20,
+        "mean": 72.1,
+        "minimum": 34.0,
+        "maximum": 94.0,
+        "scores_at_least_95": 0
+      },
+      "gemini": {
+        "n": 20,
+        "mean": 90.3,
+        "minimum": 60.0,
+        "maximum": 100.0,
+        "scores_at_least_95": 12
+      },
+      "claude": {
+        "n": 20,
+        "mean": 83.2,
+        "minimum": 50.0,
+        "maximum": 99.0,
+        "scores_at_least_95": 6
+      }
+    }
+  }
+}
