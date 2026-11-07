@@ -18,8 +18,6 @@ These are experimental artifacts, outside the main CNSM proceedings and IEEE Xpl
 | [Presentations](videos/README.md) | The 11 supplied videos, linked to their papers |
 | [Methodology](docs/methodology.md) | Call, rubric, aggregation, chronology and reproducibility limits |
 | [Known issues](docs/known-issues.md) | Duplicated Gemini assignment and source limitations |
-| [Panel working notes, Spanish](discussion/panel-reflections.es.md) | Discussion prompts and hypotheses, not conference minutes |
-| [Publish to GitHub and Zenodo, Spanish](docs/publication-guide.es.md) | Release, DOI, attribution and website instructions |
 
 ## From call to archive
 
@@ -35,7 +33,6 @@ flowchart LR
     C --> G
     D --> G
     F --> G
-    G --> H[Versioned Zenodo deposit]
 ```
 
 The ranking uses equal reviewer weights and selects the top 11 unrounded means. **The Gemini files for papers 22 and 23 are byte-identical and describe paper 22.** Original scores remain in the historical record, with paper 23 explicitly flagged. The missing review has not been invented or substituted. See the [impact analysis](docs/known-issues.md#gemini-assignment-for-paper-23).
@@ -49,10 +46,8 @@ reviews/      Original ChatGPT, Gemini and Claude texts
 results/      Original ranking workbook and readable results
 videos/       11 original MP4 presentations and index
 data/         Public metadata, scores, provenance and checksums
-discussion/   Contextualised panel preparation notes
 docs/         Methodology, data dictionary and publication guide
 scripts/      Rebuild, validate and package the archive
-zenodo/       Prepared attribution metadata and release notes
 ```
 
 PDFs, review texts, call, prompt, videos and the results workbook are unchanged copies. One video extension was normalised to lowercase. Tables and indexes are derived files. [Provenance](docs/provenance.md) records transformations and exclusions.
@@ -84,4 +79,4 @@ Use [CITATION.cff](CITATION.cff) for the archive citation. Creators: **Pal Varga
 
 When reusing a particular paper or video, also identify its paper ID and credit the people and systems declared in that artifact. The archive citation does not replace individual attribution.
 
-The existing [GPL v3 license](LICENSE) is retained. Imported artifacts are not automatically relicensed by inclusion here; see [RIGHTS.md](RIGHTS.md). Report corrections through [repository issues](https://github.com/NETSERV-UAH/cnsm-2026-cfaip/issues), record substantive changes in [CHANGELOG.md](CHANGELOG.md), and preserve released versions for citation.
+The existing [GPL v3 license](LICENSE) is retained. Imported artifacts are not automatically relicensed by inclusion here; see [RIGHTS.md](RIGHTS.md). Report corrections through [repository issues](https://github.com/NETSERV-UAH/cnsm-2026-cfaip/issues) and preserve released versions for citation.
