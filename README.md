@@ -1,4 +1,4 @@
-# CNSM 2026 — The Agentic AI Researcher
+# CNSM 2026 — The Agentic AI Researcher [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24038002.svg)](https://doi.org/10.5281/zenodo.24038002)
 
 An archive of the **Call for AI Papers: Special Experimental Track** at the 22nd International Conference on Network and Service Management, Alcalá de Henares, Spain, 26–30 October 2026.
 
